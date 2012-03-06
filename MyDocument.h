@@ -18,4 +18,5 @@
 }
 
 -(IBAction) addNewItem:(id)sender;
+-(IBAction) deleteItem:(id)sender;
 @end

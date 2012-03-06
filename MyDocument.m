@@ -10,10 +10,27 @@
 
 @implementation MyDocument
 
+-(IBAction)deleteItem:(id)sender
+{
+    if ([shoppingListTableView selectedRow] >= 0) 
+    {
+        NSInteger selRow = [shoppingListTableView selectedRow];
+        [shoppingListArray removeObjectAtIndex:selRow];
+        [shoppingListTableView reloadData];
+    }
+}
+
 //check for whitespace before submitting a new item to the array, reload data on addition
 -(IBAction) addNewItem:(id)sender
 {
-	NSString * newItem = [newShoppingItemTextField stringValue];
+	NSString *newItem = [newShoppingItemTextField stringValue];
+    if([newItem length] > 0)
+    {
+        [shoppingListArray addObject:newItem];
+        [shoppingListTableView reloadData];
+        //clear text box. is there a better way?
+        [newShoppingItemTextField setStringValue:@""];
+    }
     
 }
 
