@@ -4,17 +4,31 @@
 //
 //  Created by jizcakes on 19/02/2012.
 //  Copyright __MyCompanyName__ 2012 . All rights reserved.
-//
+//	
 
 #import "MyDocument.h"
 
 @implementation MyDocument
 
+//check for whitespace before submitting a new item to the array, reload data on addition
 -(IBAction) addNewItem:(id)sender
 {
-	
+	NSString * newItem = [newShoppingItemTextField stringValue];
+    
 }
 
+//mandatory protocol implementations so tabel can query data source and retrive
+//objects to populate table view
+- (NSInteger)numberOfRowsInTableView:(NSTableView *)aTableView
+{
+    return [shoppingListArray count];
+}
+
+- (id)tableView:(NSTableView *)aTableView objectValueForTableColumn:(NSTableColumn *)aTableColumn row:(NSInteger)rowIndex
+{
+    return [shoppingListArray objectAtIndex:rowIndex];
+}
+//--
 - (id)init
 {
     self = [super init];
@@ -23,6 +37,8 @@
 							 initWithObjects:@"Eggs",@"Bread",@"Milk",nil];
         // Add your subclass-specific initialization here.
         // If an error occurs here, send a [self release] message and return nil.
+        [shoppingListTableView setDataSource:shoppingListArray];
+        //[shoppingListTableView reloadData];
     
     }
     return self;
