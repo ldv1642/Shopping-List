@@ -1,1 +1,4 @@
 -allow edit in place via double clicking an item in the list
+-open and save
+-confirmation window on delete
+
