@@ -34,7 +34,7 @@
     
 }
 
-//mandatory protocol implementations so tabel can query data source and retrive
+//mandatory protocol implementations so table can query data source and retrive
 //objects to populate table view
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)aTableView
 {
@@ -44,6 +44,16 @@
 - (id)tableView:(NSTableView *)aTableView objectValueForTableColumn:(NSTableColumn *)aTableColumn row:(NSInteger)rowIndex
 {
     return [shoppingListArray objectAtIndex:rowIndex];
+}
+
+- (void)tableView:(NSTableView *)aTableView setObjectValue:(id)anObject forTableColumn:(NSTableColumn *)aTableColumn row:(NSInteger)rowIndex
+{
+    
+    if([(NSString*)anObject length] > 0) 
+    {
+        [shoppingListArray replaceObjectAtIndex:rowIndex withObject:anObject];
+        [shoppingListTableView reloadData];
+    }
 }
 //--
 - (id)init
