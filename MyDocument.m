@@ -34,16 +34,26 @@
     
 }
 
-//mandatory protocol implementations so tabel can query data source and retrive
+//mandatory protocol implementations so table can query data source and retrive
 //objects to populate table view
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)aTableView
 {
     return [shoppingListArray count];
 }
-
+//repeatedly called while filling up table view
 - (id)tableView:(NSTableView *)aTableView objectValueForTableColumn:(NSTableColumn *)aTableColumn row:(NSInteger)rowIndex
 {
     return [shoppingListArray objectAtIndex:rowIndex];
+}
+//inplace editing of values in tableview
+- (void)tableView:(NSTableView *)aTableView setObjectValue:(id)anObject forTableColumn:(NSTableColumn *)aTableColumn row:(NSInteger)rowIndex
+{
+    
+    if([(NSString*)anObject length] > 0) 
+    {
+        [shoppingListArray replaceObjectAtIndex:rowIndex withObject:anObject];
+        [shoppingListTableView reloadData];
+    }
 }
 //--
 - (id)init
@@ -80,32 +90,20 @@
     // Add any code here that needs to be executed once the windowController has loaded the document's window.
 }
 
-- (NSData *)dataOfType:(NSString *)typeName error:(NSError **)outError
+- (BOOL)writeToURL:(NSURL *)absoluteURL ofType:(NSString *)typeName error:(NSError **)outError
 {
-    // Insert code here to write your document to data of the specified type. If the given outError != NULL, ensure that you set *outError when returning nil.
+    return [shoppingListArray writeToURL:absoluteURL atomically:true];
 
-    // You can also choose to override -fileWrapperOfType:error:, -writeToURL:ofType:error:, or -writeToURL:ofType:forSaveOperation:originalContentsURL:error: instead.
-
-    // For applications targeted for Panther or earlier systems, you should use the deprecated API -dataRepresentationOfType:. In this case you can also choose to override -fileWrapperRepresentationOfType: or -writeToFile:ofType: instead.
-
-    if ( outError != NULL ) {
-		*outError = [NSError errorWithDomain:NSOSStatusErrorDomain code:unimpErr userInfo:NULL];
-	}
-	return nil;
 }
 
-- (BOOL)readFromData:(NSData *)data ofType:(NSString *)typeName error:(NSError **)outError
+- (BOOL)readFromURL:(NSURL *)absoluteURL ofType:(NSString *)typeName error:(NSError **)outError
 {
-    // Insert code here to read your document from the given data of the specified type.  If the given outError != NULL, ensure that you set *outError when returning NO.
+    shoppingListArray = [[NSMutableArray alloc] initWithContentsOfURL:absoluteURL];
 
-    // You can also choose to override -readFromFileWrapper:ofType:error: or -readFromURL:ofType:error: instead. 
+    return true;
     
-    // For applications targeted for Panther or earlier systems, you should use the deprecated API -loadDataRepresentation:ofType. In this case you can also choose to override -readFromFile:ofType: or -loadFileWrapperRepresentation:ofType: instead.
-    
-    if ( outError != NULL ) {
-		*outError = [NSError errorWithDomain:NSOSStatusErrorDomain code:unimpErr userInfo:NULL];
-	}
-    return YES;
 }
+
+
 
 @end
