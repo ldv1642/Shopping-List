@@ -40,12 +40,12 @@
 {
     return [shoppingListArray count];
 }
-
+//repeatedly called while filling up table view
 - (id)tableView:(NSTableView *)aTableView objectValueForTableColumn:(NSTableColumn *)aTableColumn row:(NSInteger)rowIndex
 {
     return [shoppingListArray objectAtIndex:rowIndex];
 }
-
+//inplace editing of values in tableview
 - (void)tableView:(NSTableView *)aTableView setObjectValue:(id)anObject forTableColumn:(NSTableColumn *)aTableColumn row:(NSInteger)rowIndex
 {
     
