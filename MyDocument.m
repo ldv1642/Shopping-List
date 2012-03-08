@@ -14,6 +14,7 @@
 {
     if ([shoppingListTableView selectedRow] >= 0) 
     {
+		[self updateChangeCount:NSChangeDone];
         NSInteger selRow = [shoppingListTableView selectedRow];
         [shoppingListArray removeObjectAtIndex:selRow];
         [shoppingListTableView reloadData];
@@ -26,6 +27,7 @@
 	NSString *newItem = [newShoppingItemTextField stringValue];
     if([newItem length] > 0)
     {
+		[self updateChangeCount:NSChangeDone];
         [shoppingListArray addObject:newItem];
         [shoppingListTableView reloadData];
         //clear text box. is there a better way?
@@ -51,6 +53,7 @@
     
     if([(NSString*)anObject length] > 0) 
     {
+		[self updateChangeCount:NSChangeDone];
         [shoppingListArray replaceObjectAtIndex:rowIndex withObject:anObject];
         [shoppingListTableView reloadData];
     }
@@ -98,12 +101,12 @@
 
 - (BOOL)readFromURL:(NSURL *)absoluteURL ofType:(NSString *)typeName error:(NSError **)outError
 {
+	[shoppingListArray release];
     shoppingListArray = [[NSMutableArray alloc] initWithContentsOfURL:absoluteURL];
+	[shoppingListTableView reloadData];
 
     return true;
     
 }
-
-
 
 @end
