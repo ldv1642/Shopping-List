@@ -57,12 +57,13 @@
 //objects to populate table view
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)aTableView
 {
-    return [shoppingListArray count];
+    return [dictionaryListArray count];
 }
 //repeatedly called while filling up table view
 - (id)tableView:(NSTableView *)aTableView objectValueForTableColumn:(NSTableColumn *)aTableColumn row:(NSInteger)rowIndex
 {
-    return [shoppingListArray objectAtIndex:rowIndex];
+    return [[dictionaryListArray objectAtIndex:rowIndex ]
+            valueForKey:@"Item"];
 }
 //inplace editing of values in tableview
 - (void)tableView:(NSTableView *)aTableView setObjectValue:(id)anObject forTableColumn:(NSTableColumn *)aTableColumn row:(NSInteger)rowIndex
@@ -80,11 +81,18 @@
 {
     self = [super init];
     if (self) {
+        dictionaryListArray = [[NSMutableArray alloc] init ];
+        shoppingListDictionary = [[NSMutableDictionary alloc]init];
+        [shoppingListDictionary setValue:@"Bread" forKey:@"Item"];
+        [dictionaryListArray addObject: shoppingListDictionary];
+        
 		shoppingListArray = [[NSMutableArray alloc] 
 							 initWithObjects:@"Eggs",@"Bread",@"Milk",nil];
+        
         // Add your subclass-specific initialization here.
         // If an error occurs here, send a [self release] message and return nil.
-        [shoppingListTableView setDataSource:shoppingListArray];
+        //[shoppingListTableView setDataSource:shoppingListArray];
+        [shoppingListTableView setDataSource:dictionaryListArray];
         //[shoppingListTableView reloadData];
     
     }
@@ -93,6 +101,7 @@
 
 -(void)dealloc
 {
+    [dictionaryListArray release];
 	[shoppingListArray release];
 	[super dealloc];
 }
