@@ -16,7 +16,7 @@
     {
 		NSAlert *safeToDelete = [[NSAlert alloc] init];
 		[safeToDelete setAlertStyle:NSWarningAlertStyle];
-		[safeToDelete setInformativeText:@"This can now be undone"];
+		[safeToDelete setInformativeText:@"This can not be undone"];
 		[safeToDelete setMessageText:@"Sure you want to delete the item?"];
 		[safeToDelete addButtonWithTitle:@"Delete"];
 		[safeToDelete addButtonWithTitle:@"Cancel"];
