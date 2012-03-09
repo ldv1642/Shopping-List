@@ -13,7 +13,7 @@
 {
 	IBOutlet NSTableView *shoppingListTableView;
 	IBOutlet NSTextField *newShoppingItemTextField;
-	
+
 	NSMutableArray *shoppingListArray;
 }
 

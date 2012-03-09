@@ -14,6 +14,22 @@
 {
     if ([shoppingListTableView selectedRow] >= 0) 
     {
+		NSAlert *safeToDelete = [[NSAlert alloc] init];
+		[safeToDelete setAlertStyle:NSWarningAlertStyle];
+		[safeToDelete setInformativeText:@"This can now be undone"];
+		[safeToDelete setMessageText:@"Sure you want to delete the item?"];
+		[safeToDelete addButtonWithTitle:@"Delete"];
+		[safeToDelete addButtonWithTitle:@"Cancel"];
+		
+		int buttonClicked = [safeToDelete runModal];
+		if(!(buttonClicked == NSAlertFirstButtonReturn))
+		{
+			[safeToDelete release];
+			return;
+		}
+		
+		[safeToDelete release];
+		[self updateChangeCount:NSChangeDone];
         NSInteger selRow = [shoppingListTableView selectedRow];
         [shoppingListArray removeObjectAtIndex:selRow];
         [shoppingListTableView reloadData];
@@ -26,10 +42,13 @@
 	NSString *newItem = [newShoppingItemTextField stringValue];
     if([newItem length] > 0)
     {
+		[self updateChangeCount:NSChangeDone];
         [shoppingListArray addObject:newItem];
         [shoppingListTableView reloadData];
         //clear text box. is there a better way?
-        [newShoppingItemTextField setStringValue:@""];
+		if(sender == newShoppingItemTextField)
+			[newShoppingItemTextField setStringValue:@""];
+			
     }
     
 }
@@ -51,6 +70,7 @@
     
     if([(NSString*)anObject length] > 0) 
     {
+		[self updateChangeCount:NSChangeDone];
         [shoppingListArray replaceObjectAtIndex:rowIndex withObject:anObject];
         [shoppingListTableView reloadData];
     }
@@ -98,12 +118,12 @@
 
 - (BOOL)readFromURL:(NSURL *)absoluteURL ofType:(NSString *)typeName error:(NSError **)outError
 {
+	[shoppingListArray release];
     shoppingListArray = [[NSMutableArray alloc] initWithContentsOfURL:absoluteURL];
+	[shoppingListTableView reloadData];
 
     return true;
     
 }
-
-
 
 @end
