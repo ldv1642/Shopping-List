@@ -14,6 +14,21 @@
 {
     if ([shoppingListTableView selectedRow] >= 0) 
     {
+		NSAlert *safeToDelete = [[NSAlert alloc] init];
+		[safeToDelete setAlertStyle:NSWarningAlertStyle];
+		[safeToDelete setInformativeText:@"This can now be undone"];
+		[safeToDelete setMessageText:@"Sure you want to delete the item?"];
+		[safeToDelete addButtonWithTitle:@"Delete"];
+		[safeToDelete addButtonWithTitle:@"Cancel"];
+		
+		int buttonClicked = [safeToDelete runModal];
+		if(!(buttonClicked == NSAlertFirstButtonReturn))
+		{
+			[safeToDelete release];
+			return;
+		}
+		
+		[safeToDelete release];
 		[self updateChangeCount:NSChangeDone];
         NSInteger selRow = [shoppingListTableView selectedRow];
         [shoppingListArray removeObjectAtIndex:selRow];
@@ -31,7 +46,9 @@
         [shoppingListArray addObject:newItem];
         [shoppingListTableView reloadData];
         //clear text box. is there a better way?
-        [newShoppingItemTextField setStringValue:@""];
+		if(sender == newShoppingItemTextField)
+			[newShoppingItemTextField setStringValue:@""];
+			
     }
     
 }

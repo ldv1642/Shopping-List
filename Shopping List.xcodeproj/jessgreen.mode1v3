@@ -272,8 +272,8 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>11</integer>
-									<integer>5</integer>
+									<integer>3</integer>
+									<integer>1</integer>
 									<integer>0</integer>
 								</array>
 							</array>
@@ -315,7 +315,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>todo</string>
+								<string>MyDocument.m</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -323,11 +323,11 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>todo</string>
+										<string>MyDocument.m</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>A60F3A3515094E1400AAFC7E</string>
+										<string>A60F3A721509620300AAFC7E</string>
 										<key>history</key>
 										<array>
 											<string>A60F39AE150944D300AAFC7E</string>
@@ -335,10 +335,11 @@
 											<string>A60F39B2150944D300AAFC7E</string>
 											<string>A60F39B4150944D300AAFC7E</string>
 											<string>A60F39B6150944D300AAFC7E</string>
-											<string>A60F3A2115094D6400AAFC7E</string>
 											<string>A60F3A2215094D6400AAFC7E</string>
-											<string>A60F3A3215094E1400AAFC7E</string>
-											<string>A60F3A3315094E1400AAFC7E</string>
+											<string>A60F3A421509503A00AAFC7E</string>
+											<string>A60F3A50150951BA00AAFC7E</string>
+											<string>A60F3A6B1509524400AAFC7E</string>
+											<string>A60F3A6C1509524400AAFC7E</string>
 										</array>
 										<key>prevStack</key>
 										<array>
@@ -362,6 +363,17 @@
 											<string>A60F3A2915094D6400AAFC7E</string>
 											<string>A60F3A2A15094D6400AAFC7E</string>
 											<string>A60F3A3415094E1400AAFC7E</string>
+											<string>A60F3A451509503A00AAFC7E</string>
+											<string>A60F3A461509503A00AAFC7E</string>
+											<string>A60F3A471509503A00AAFC7E</string>
+											<string>A60F3A481509503A00AAFC7E</string>
+											<string>A60F3A491509503A00AAFC7E</string>
+											<string>A60F3A53150951BA00AAFC7E</string>
+											<string>A60F3A54150951BA00AAFC7E</string>
+											<string>A60F3A55150951BA00AAFC7E</string>
+											<string>A60F3A56150951BA00AAFC7E</string>
+											<string>A60F3A6D1509524400AAFC7E</string>
+											<string>A60F3A6E1509524400AAFC7E</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -555,9 +567,11 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>1C78EAAD065D492600B07095</string>
+		<string>A60F3A641509521000AAFC7E</string>
+		<string>A60F3A651509521000AAFC7E</string>
 		<string>1CD10A99069EF8BA00B06720</string>
 		<string>A6B022FB150565C10050D620</string>
+		<string>1C78EAAD065D492600B07095</string>
 		<string>/Users/jessgreen/Desktop/Dan/obj-c/Learning/Shopping-List/Shopping List.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
@@ -891,6 +905,8 @@
 					<key>Dock</key>
 					<array>
 						<dict>
+							<key>BecomeActive</key>
+							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
@@ -936,7 +952,7 @@
 			<key>WindowToolGUID</key>
 			<string>1C78EAAD065D492600B07095</string>
 			<key>WindowToolIsVisible</key>
-			<false/>
+			<true/>
 		</dict>
 		<dict>
 			<key>Identifier</key>

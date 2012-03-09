@@ -6,6 +6,9 @@
 	in place edit
 	add item
 -remove resizable for doc
+-added pop confirmation on delete item
+-if user clicks add button, new item text remains, allowing user to delete manually. if item is 
+added via on enter, text is removed
 
 //Todo
 
