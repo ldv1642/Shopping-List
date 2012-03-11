@@ -1,6 +1,5 @@
 //Complete
 -allow edit in place via double clicking an item in the list checked for 0 length strings
--open and save
 -on change mark doc as dirty
 	delete
 	in place edit
