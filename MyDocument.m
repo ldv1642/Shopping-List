@@ -46,7 +46,14 @@
 //check for whitespace before submitting a new item to the array, reload data on addition
 -(IBAction) addNewItem:(id)sender
 {
+    
 	NSString *newItem = [newShoppingItemTextField stringValue];
+    
+    //check for duplicates
+    for(NSMutableDictionary *d in dictionaryListArray)
+        if([[d objectForKey:@"Item"] isEqualToString:newItem])
+            return;
+    //no duplicates found so make a new dictionary ready for data
     NSMutableDictionary *shoppListDictionary = [[NSMutableDictionary alloc] init];
     
     //check we have text to submit
@@ -141,7 +148,7 @@
     [super windowControllerDidLoadNib:aController];
     // Add any code here that needs to be executed once the windowController has loaded the document's window.
 }
-
+//TODO - Save and load 
 - (BOOL)writeToURL:(NSURL *)absoluteURL ofType:(NSString *)typeName error:(NSError **)outError
 {
     //return [shoppingListArray writeToURL:absoluteURL atomically:true];
