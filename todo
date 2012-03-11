@@ -14,3 +14,4 @@ added via on enter, text is removed
 //Todo
 -save and load docs with new datastore
 -add status label to give user feedback
+-highlight next item on delete
