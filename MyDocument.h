@@ -11,13 +11,10 @@
 
 @interface MyDocument : NSDocument
 {
-    NSMutableDictionary *shoppingListDictionary;
     NSMutableArray *dictionaryListArray;
     
 	IBOutlet NSTableView *shoppingListTableView;
 	IBOutlet NSTextField *newShoppingItemTextField;
-    //deprecated, moving to dictionary to hold array of dictionaries
-	NSMutableArray *shoppingListArray;
 }
 
 -(IBAction) addNewItem:(id)sender;

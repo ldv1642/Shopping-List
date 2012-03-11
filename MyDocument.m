@@ -12,6 +12,7 @@
 
 -(IBAction)deleteItem:(id)sender
 {
+    //check we have a row selected
     if ([shoppingListTableView selectedRow] >= 0) 
     {
 		NSAlert *safeToDelete = [[NSAlert alloc] init];
@@ -21,18 +22,24 @@
 		[safeToDelete addButtonWithTitle:@"Delete"];
 		[safeToDelete addButtonWithTitle:@"Cancel"];
 		
+        //capture what button was clicked
 		int buttonClicked = [safeToDelete runModal];
-		if(!(buttonClicked == NSAlertFirstButtonReturn))
+        //if cancel then return
+		if(buttonClicked == NSAlertSecondButtonReturn)
 		{
+            //cleanup
 			[safeToDelete release];
 			return;
 		}
-		
+		//else delete item
+        //clean up
 		[safeToDelete release];
-		[self updateChangeCount:NSChangeDone];
-        NSInteger selRow = [shoppingListTableView selectedRow];
-        [shoppingListArray removeObjectAtIndex:selRow];
+		//remove item at row selected and reload
+        [dictionaryListArray removeObjectAtIndex:[shoppingListTableView selectedRow]];
         [shoppingListTableView reloadData];
+        
+        //mark doc as dirty
+        [self updateChangeCount:NSChangeDone];
     }
 }
 
@@ -40,16 +47,27 @@
 -(IBAction) addNewItem:(id)sender
 {
 	NSString *newItem = [newShoppingItemTextField stringValue];
+    NSMutableDictionary *shoppListDictionary = [[NSMutableDictionary alloc] init];
+    
+    //check we have text to submit
     if([newItem length] > 0)
     {
-		[self updateChangeCount:NSChangeDone];
-        [shoppingListArray addObject:newItem];
+        //make a new dictionary item and add to array of items
+        [shoppListDictionary setObject:newItem forKey:@"Item"];
+        [dictionaryListArray addObject:shoppListDictionary];
         [shoppingListTableView reloadData];
+        
         //clear text box. is there a better way?
 		if(sender == newShoppingItemTextField)
 			[newShoppingItemTextField setStringValue:@""];
+        
+        //set doc dirty
+        [self updateChangeCount:NSChangeDone];
 			
     }
+    
+    //clean up
+    [shoppListDictionary release];
     
 }
 
@@ -69,11 +87,19 @@
 - (void)tableView:(NSTableView *)aTableView setObjectValue:(id)anObject forTableColumn:(NSTableColumn *)aTableColumn row:(NSInteger)rowIndex
 {
     
-    if([(NSString*)anObject length] > 0) 
+    if([anObject length] > 0) 
     {
-		[self updateChangeCount:NSChangeDone];
-        [shoppingListArray replaceObjectAtIndex:rowIndex withObject:anObject];
+        //new dictionary for item to replace
+        NSMutableDictionary *shoppingListDictionary = [[NSMutableDictionary alloc]init];
+        [shoppingListDictionary setValue:anObject forKey:@"Item"];
+        //replace old dictionary with new
+        [dictionaryListArray replaceObjectAtIndex:rowIndex withObject:shoppingListDictionary];
         [shoppingListTableView reloadData];
+        
+        //clean up
+        [shoppingListDictionary release];
+        //set document to be dirty
+		[self updateChangeCount:NSChangeDone];
     }
 }
 //--
@@ -81,19 +107,17 @@
 {
     self = [super init];
     if (self) {
+        //array to hold items as dictionaries
         dictionaryListArray = [[NSMutableArray alloc] init ];
-        shoppingListDictionary = [[NSMutableDictionary alloc]init];
+        //test dictionary
+        NSMutableDictionary *shoppingListDictionary = [[NSMutableDictionary alloc]init];
         [shoppingListDictionary setValue:@"Bread" forKey:@"Item"];
         [dictionaryListArray addObject: shoppingListDictionary];
-        
-		shoppingListArray = [[NSMutableArray alloc] 
-							 initWithObjects:@"Eggs",@"Bread",@"Milk",nil];
-        
-        // Add your subclass-specific initialization here.
-        // If an error occurs here, send a [self release] message and return nil.
-        //[shoppingListTableView setDataSource:shoppingListArray];
+        //set source of data for table view
         [shoppingListTableView setDataSource:dictionaryListArray];
-        //[shoppingListTableView reloadData];
+        
+        //clean up
+        [shoppingListDictionary release];
     
     }
     return self;
@@ -102,7 +126,6 @@
 -(void)dealloc
 {
     [dictionaryListArray release];
-	[shoppingListArray release];
 	[super dealloc];
 }
 
@@ -121,17 +144,17 @@
 
 - (BOOL)writeToURL:(NSURL *)absoluteURL ofType:(NSString *)typeName error:(NSError **)outError
 {
-    return [shoppingListArray writeToURL:absoluteURL atomically:true];
+    //return [shoppingListArray writeToURL:absoluteURL atomically:true];
 
 }
 
 - (BOOL)readFromURL:(NSURL *)absoluteURL ofType:(NSString *)typeName error:(NSError **)outError
 {
-	[shoppingListArray release];
-    shoppingListArray = [[NSMutableArray alloc] initWithContentsOfURL:absoluteURL];
-	[shoppingListTableView reloadData];
+	//[shoppingListArray release];
+   // shoppingListArray = [[NSMutableArray alloc] initWithContentsOfURL:absoluteURL];
+	//[shoppingListTableView reloadData];
 
-    return true;
+   // return true;
     
 }
 
